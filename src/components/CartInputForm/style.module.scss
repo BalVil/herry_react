@@ -1,0 +1,23 @@
+.cartInputForm {
+  padding: 10px;
+  background-color: rgb(163, 207, 248);
+
+  .form {
+    display: flex;
+
+    .label {
+      display: flex;
+      margin-right: 10px;
+      column-gap: 10px;
+      flex: 1;
+
+      span {
+        text-align: right;
+      }
+
+      input {
+        flex: 1;
+      }
+    }
+  }
+}

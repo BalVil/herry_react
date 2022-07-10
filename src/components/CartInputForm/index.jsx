@@ -1,4 +1,57 @@
-const CartInputForm = () => {
-  return;
+import { useState } from 'react';
+import style from './style.module.scss';
+import Button from '../Button';
+
+const CartInputForm = ({ onSubmit }) => {
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState(0);
+  const [extendedGuarantee, setExtendedGuarantee] = useState('');
+
+  const handleNameChange = e => setName(e.target.value);
+  const handlePriceChange = e => setPrice(e.target.value);
+  const handleEGChange = e => setExtendedGuarantee(e.target.checked);
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    onSubmit({
+      id: String(Date.now()),
+      count: 1,
+      name: String(name),
+      price: Number(price),
+      extendedGuarantee,
+    });
+
+    setName('');
+    setPrice(0);
+    setExtendedGuarantee(false);
+  };
+
+  return (
+    <div className={style.cartInputForm}>
+      <form className={style.form} onSubmit={handleSubmit}>
+        <label className={style.label}>
+          <span>name</span>
+          <input type="text" value={name} onChange={handleNameChange} />
+        </label>
+
+        <label className={style.label}>
+          <span>price</span>
+          <input type="number" value={price} onChange={handlePriceChange} />
+        </label>
+
+        <label className={style.label}>
+          <span>extended guarantee</span>
+          <input
+            type="checkbox"
+            checked={extendedGuarantee}
+            onChange={handleEGChange}
+          />
+        </label>
+
+        <Button type="submit">+ add</Button>
+      </form>
+    </div>
+  );
 };
+
 export default CartInputForm;
