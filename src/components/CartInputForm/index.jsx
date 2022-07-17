@@ -1,22 +1,24 @@
 import { useState } from 'react';
-import style from './style.module.scss';
 import Button from '../Button';
+import style from './style.module.scss';
 
 const CartInputForm = ({ onSubmit }) => {
+  // const formRef = useRef();
   const [name, setName] = useState('');
   const [price, setPrice] = useState(0);
-  const [extendedGuarantee, setExtendedGuarantee] = useState('');
+  const [extendedGuarantee, setExtendedGuarantee] = useState(false);
 
   const handleNameChange = e => setName(e.target.value);
   const handlePriceChange = e => setPrice(e.target.value);
   const handleEGChange = e => setExtendedGuarantee(e.target.checked);
+
   const handleSubmit = e => {
     e.preventDefault();
 
     onSubmit({
-      id: String(Date.now()),
+      // id: Date.now().toString(),
       count: 1,
-      name: String(name),
+      name,
       price: Number(price),
       extendedGuarantee,
     });
@@ -24,6 +26,7 @@ const CartInputForm = ({ onSubmit }) => {
     setName('');
     setPrice(0);
     setExtendedGuarantee(false);
+    // formRef.current.reset();
   };
 
   return (

@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
+    "json-server": "^0.17.0",
     "node-sass": "^7.0.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
@@ -13,12 +15,14 @@
     "react-hook-form": "^7.33.1",
     "react-jss": "^10.9.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.0.5",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "server": "json-server --watch server/db.json --port 8080 --delay 1000",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

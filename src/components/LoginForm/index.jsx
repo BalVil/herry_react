@@ -1,34 +1,38 @@
 import { useState } from 'react';
 
 const LoginForm = () => {
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  const [login, setLogin] = useState('werhwertyu');
+  const [password, setPassword] = useState('sdfghj');
 
   const handleChangeLogin = e => setLogin(e.target.value);
-  const handleChangePasswoed = e => setPassword(e.target.value);
+  const handleChangePassword = e => setPassword(e.target.value);
+
   const handleSubmit = e => {
     e.preventDefault();
 
-    console.log(login);
-    console.log(password);
+    console.log('login:', login);
+    console.log('password:', password);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        <span>Login</span>
-        <input type="text" value={login} onChange={handleChangeLogin}></input>
+        <span>login</span>
+        <input type="text" value={login} onChange={handleChangeLogin} />
       </label>
+
       <label>
-        <span>Password</span>
+        <span>password</span>
         <input
           type="password"
           value={password}
-          onChange={handleChangePasswoed}></input>
+          onChange={handleChangePassword}
+        />
       </label>
 
-      <button type="submit">Submit</button>
+      <button type="submit">login</button>
     </form>
   );
 };
+
 export default LoginForm;

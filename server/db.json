@@ -1,0 +1,25 @@
+{
+  "cart": [
+    {
+      "id": "434556",
+      "name": "mouse",
+      "price": 15,
+      "count": 8,
+      "extendedGuarantee": false
+    },
+    {
+      "name": "CPU",
+      "price": 200,
+      "count": 3,
+      "extendedGuarantee": true,
+      "id": "EH96soQ"
+    },
+    {
+      "count": 3,
+      "name": "coros",
+      "price": 20,
+      "extendedGuarantee": false,
+      "id": "Gg0vMC5"
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { createUseStyles } from 'react-jss';
 import { CloseButton } from '../Button';
@@ -5,11 +6,12 @@ import { CloseButton } from '../Button';
 const useStyles = createUseStyles({
   cartItem: {
     display: 'flex',
-    justifyContent: 'space-between',
+    padding: 10,
     alignItems: 'center',
     columnGap: 30,
-    padding: 10,
-    backgroundColor: '#2db4b4',
+    // backgroundColor: '#bada55',
+    backgroundColor: '#c9e0e6',
+    justifyContent: 'space-between',
   },
   leftCol: {
     display: 'flex',
@@ -29,46 +31,42 @@ const useStyles = createUseStyles({
   },
   value({ item }) {
     return {
-      color: 'red',
+      color: !item.count ? 'red' : 'green',
       fontWeight: !item.count ? 800 : 400,
     };
   },
 });
 
-const CartItem = ({
-  item,
-  onRemoveItem,
-  onChange,
-  onDecrement,
-  onIncrement,
-}) => {
+const CartItem = ({ item, onRemoveItem, onChangeCount }) => {
+  const [timerValue, setTimerValue] = useState(0);
+
   const styles = useStyles({ item });
+  const amount = item.count * item.price;
 
-  const { id, name, count, price, extendedGuarantee } = item;
-  const amount = count * price;
+  const decrement = () => onChangeCount(item.id, -1);
+  const increment = () => onChangeCount(item.id, 1);
+  const remove = () => onRemoveItem(item.id);
 
-  const decrement = () => onChange(id, -1);
-  const increment = () => onChange(id, +1);
-  const remove = () => onRemoveItem(id);
+  console.log('render item:', item.id);
 
   return (
     <div className={styles.cartItem}>
       <div className={styles.leftCol}>
-        <span>{name}</span>
-        <span>{price}$</span>
+        <span>{item.name}</span>
+        <span>{item.price}$</span>
+        <span>{timerValue}</span>
       </div>
 
       <div className={styles.counter}>
         <button onClick={decrement}>-</button>
-        <span className={styles.value}>{count}</span>
+        <span className={styles.value}>{item.count}</span>
         <button onClick={increment}>+</button>
       </div>
 
       <span className={styles.amount}>
-        {amount}${extendedGuarantee && ' +10%'}
+        {amount}${item.extendedGuarantee && ' +10%'}
       </span>
-      <CloseButton onRemoveItem={remove} />
-      {/* <NormalButton /> */}
+      <CloseButton item={item} onClick={remove} />
     </div>
   );
 };
@@ -81,7 +79,7 @@ CartItem.propTypes = {
     count: PropTypes.number.isRequired,
   }),
   onRemoveItem: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChangeCount: PropTypes.func.isRequired,
   // onDecrement: PropTypes.func.isRequired,
   // onIncrement: PropTypes.func.isRequired,
 };
